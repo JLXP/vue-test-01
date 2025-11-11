@@ -6,13 +6,21 @@
   <body>
     <div id="app">
       <h1>{{message}}</h1>
-
-      <p v-for="luckyNumber in luckyNumbers">Luky Number: {{luckyNumber}}</p>
-      <p>{{employee}} is {{employee.age}} years old</p>
+        Lucky Numbers:
+      <span v-for="(luckyNumber,index) in luckyNumbers">
+        <br />{{luckyNumber}}
+      </span>
+      <p>{{employee.name}} is {{employee.age}} years old</p>
       <p>His salary is {{employee.salary}}</p>
-      <p v-show="employee.hasCorporated">Spending Limit for Card (show): {{employee.spendingLimit}}</p>
-      <p v-if="employee.hasCorporated">Spending Limit for Card (if): {{employee.spendingLimit}}</p>
-      <p v-else-if="employee.salary>2500 && employee.yearsWithCompany>1">Employee is eligible for a corporate</p>
+      <p v-show="employee.hasCorporated">
+        Spending Limit for Card (show): {{employee.spendingLimit}}
+      </p>
+      <p v-if="employee.hasCorporated">
+        Spending Limit for Card (if): {{employee.spendingLimit}}
+      </p>
+      <p v-else-if="employee.salary>2500 && employee.yearsWithCompany>1">
+        Employee is eligible for a corporate
+      </p>
       <p v-else>Employee is not eligible for a corporate card</p>
     </div>
   </body>
@@ -28,7 +36,7 @@
           salary: 50000,
           hasCorporated: false,
           spendingLimit: 10000,
-          yearsWithCompany: 5
+          yearsWithCompany: 5,
         });
 
         return {
