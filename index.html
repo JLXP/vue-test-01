@@ -5,11 +5,24 @@
   </head>
   <body>
     <div id="app">
-      <div v-bind:style="{backgroundColor:'aqua', fontSize:fontSizeTemp+'px'}">Hello world</div>
-      <div v-bind:style="{'background-color':'aqua', 'font-size':'40px'}">Hello world</div>
-      <br/>
-      <br/>
-      <span class="padding-medium" v-bind:class="{h1:true, 'bg-grey':true}">Random Text</span>
+      <div v-bind:style="{backgroundColor:'aqua', fontSize:fontSizeTemp+'px'}">
+        Hello world
+      </div>
+      <div v-bind:style="{'background-color':'aqua', 'font-size':'40px'}">
+        Hello world
+      </div>
+      <br />
+      <br />
+      <span
+        class="padding-medium"
+        v-bind:class="{h1:isMaintitle(), 'bg-green':hasGreenBackground()}"
+        >Random Text</span
+      >
+      <br />
+      <br />
+      <span class="padding-medium" v-bind:class="isMaintitle() ? MainTitle: ''"
+        >Random Text</span
+      >
     </div>
   </body>
   <script>
@@ -17,29 +30,44 @@
     const fontSizeTemp = 60;
     createApp({
       setup() {
+        const MainTitle = {
+          h1: true,
+          "bg-grey": true,
+        };
+
+        function isMaintitle() {
+          return true;
+        }
+        function hasGreenBackground() {
+          return true;
+        }
+
         return {
-            fontSizeTemp
+          fontSizeTemp,
+          isMaintitle,
+          hasGreenBackground,
+          MainTitle,
         };
       },
     }).mount("#app");
   </script>
   <style>
-    .h1{
-        font-size: 30px;
-        color: green;
+    .h1 {
+      font-size: 30px;
+      color: green;
     }
-    .h2{
-        font-size: 40px;
-        color:chocolate;
+    .h2 {
+      font-size: 40px;
+      color: chocolate;
     }
-    .bg-grey{
-        background-color: grey;
+    .bg-grey {
+      background-color: grey;
     }
-    .bg-green{
-        background-color: lightgreen;
+    .bg-green {
+      background-color: lightgreen;
     }
-    .padding-mediun{
-        padding:20px;
+    .padding-mediun {
+      padding: 20px;
     }
   </style>
 </html>
