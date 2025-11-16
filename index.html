@@ -6,10 +6,10 @@
   <body>
     <div id="app">
         <div>Learn Vue</div>
-        <input type="text" v-model="name"/>
+        <input type="text" v-model.trim="name"/>
         <br/>
         <br/>
-        <input type="number" v-model="age"/>
+        <input type="number" v-model.number="age"/>
         <p>{{name}} is {{age}} years old.</p>
     </div>
   </body>
