@@ -27,11 +27,14 @@
         <div class="border p-3 w-100 mx-auto">
           <div class="text-center">
             <h4 class="text-center">Movie List</h4>
+            <span class="text-danger" v-if="movies.length >=3">
+              You can only add 5 movies
+            </span>
             <hr/>
           </div>
           <ul class="list-group">
-            <li v-for="movie in movies" class="list-group-item">
-              {{movie.title}} - {{movie.year}}
+            <li v-for="movie in getAllMovieText()" class="list-group-item">
+              {{movie}}
             </li>
           </ul>
         </div?>
@@ -49,6 +52,7 @@
         ]);
 
         let newMovie = reactive({ title: "", year: "" });
+        let showMessage = ref(false);
 
         function addMovie(){
           if(movies.length < 5){
@@ -57,8 +61,14 @@
             newMovie.year = "";
           } 
         }
+        //replace with computed property
+        function getAllMovieText(){
+          return movies.map((movie)=>{
+            return `${movie.title} was released in ${movie.year}`
+          })
+        }
 
-        const removeMovie = () => {
+        function removeMovie(){
           movies.pop();
         }
 
@@ -66,7 +76,8 @@
           newMovie,
           movies,
           addMovie,
-          removeMovie
+          removeMovie,
+          getAllMovieText
         };
       },
     }).mount("#app");
