@@ -27,13 +27,13 @@
         <div class="border p-3 w-100 mx-auto">
           <div class="text-center">
             <h4 class="text-center">Movie List</h4>
-            <span class="text-danger" v-if="movies.length >=3">
+            <span class="text-danger" v-if="showMessage">
               You can only add 5 movies
             </span>
             <hr/>
           </div>
           <ul class="list-group">
-            <li v-for="movie in getAllMovieText()" class="list-group-item">
+            <li v-for="movie in getAllMovieText" class="list-group-item">
               {{movie}}
             </li>
           </ul>
@@ -55,6 +55,9 @@
         let showMessage = ref(false);
 
         function addMovie(){
+
+          
+
           if(movies.length < 5){
             movies.push({...newMovie});
             newMovie.title = "";
@@ -62,11 +65,19 @@
           } 
         }
         //replace with computed property
-        function getAllMovieText(){
-          return movies.map((movie)=>{
-            return `${movie.title} was released in ${movie.year}`
-          })
-        }
+        const getAllMovieText = computed(()=>{
+           return movies.map((movie)=>(
+             `${movie.title} was released in ${movie.year}`
+           ))
+        });
+
+        watch(movies, ()=>{
+          if(movies.length >=3){
+            showMessage.value = true;
+          }else{
+            showMessage.value = false;
+          }
+        })
 
         function removeMovie(){
           movies.pop();
@@ -77,7 +88,8 @@
           movies,
           addMovie,
           removeMovie,
-          getAllMovieText
+          getAllMovieText,
+          showMessage
         };
       },
     }).mount("#app");
