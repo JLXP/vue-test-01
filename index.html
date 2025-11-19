@@ -31,7 +31,6 @@
                 <input class="form-check-input" type="radio" v-model="formObj.gender" value="male" name="inlineRadioOptions">
                 Male
                 </input>
-                
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" v-model="formObj.gender" value="female" name="inlineRadioOptions">
@@ -39,6 +38,12 @@
                 </input>
               </div>
             </div>
+            <br/>
+            <hr/>
+            <select id="gender" v-model="formObj.gender" class="form-select">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
             <div class="input-group mb-3">
               <input type="checkbox" class="form-check-input" v-model="formObj.subscribe"  />
               <label class="form-check-label">&nbsp; Subscribe to newsletter</label>
